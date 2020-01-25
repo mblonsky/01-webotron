@@ -54,3 +54,27 @@ class DomainManager:
                 ]
             }       
         )
+
+    def create_cf_domain_record(self, zone, domain_name, cf_domain):
+        #endpoint = util.get_endpoint(bucket.get_region_name())
+        """Create a domain record in zone for domain_name."""
+        return self.client.change_resource_record_sets(
+            HostedZoneId=zone['Id'],
+            ChangeBatch={
+                'Comment': 'Create by webotron',
+                'Changes': [{
+                        'Action': 'UPSERT',
+                        'ResourceRecordSet': {
+                            'Name': domain_name,
+                            'Type': 'A',
+                            'AliasTarget': {
+                                'HostedZoneId': 'Z2FDTNDATAQYW2',
+                                'DNSName': cf_domain,
+                                'EvaluateTargetHealth': False
+                            }
+                        }
+                    }
+                ]
+            }
+        )
+
