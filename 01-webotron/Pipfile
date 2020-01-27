@@ -4,10 +4,11 @@ url = "https://pypi.org/simple"
 verify_ssl = true
 
 [dev-packages]
+"+pycodestyle" = "*"
+"+pydocstyle" = "*"
+"+pylint" = "*"
 ipython = "*"
-+pycodestyle = "*"
-+pydocstyle = "*"
-+pylint = "*"
+pyflakes = "*"
 
 [packages]
 boto3 = "*"

@@ -10,7 +10,7 @@ import boto3
 from botocore.exceptions import ClientError
 
 from hashlib import md5
-import util
+from webotron import util
 
 
 class BucketManager:
@@ -137,8 +137,7 @@ class BucketManager:
         elif len(hashes) == 1:
             return '"{}"'.format(hashes[0].hexdigest())
         else:
-            digests = (h.digest() for h in hashes)
-            hash = self.hash_data(reduce(lambda x, y: x + y, digests))
+            hash = self.hash_data(reduce(lambda x, y: x + y, (h.digest() for h in hashes)))
             return '"{}-{}"'.format(hash.hexdigest(), len(hashes))
 
     def upload_file(self, bucket, path, key):
